@@ -4,12 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="shortcut icon" href="./img/logo.svg" type="image/x-icon" />
+    <title>Register data</title>
+    <!--scripts-->
+    <script src="scripts/script.js" type="module" defer></script>
   </head>
   <body>
-    <header></header>
+    <header>
+      <img src="./img/logo.svg" alt="" width="50px" />
+      <h1>Register data</h1>
+    </header>
     <main>
-      <section><h1>Registro</h1></section>
+      <section><h2>Registro</h2></section>
       <section>
         <table id="table-list">
           <tr>
@@ -18,11 +24,11 @@
             <td>Telefone</td>
             <td>E-mail</td>
             <td>CEP</td>
-            <td>Cidade</td>
             <td>Rua</td>
             <td>Bairro</td>
+            <td>Cidade</td>
             <td>UF</td>
-						<td></td>
+            <td><button></button></td>
           </tr>
         </table>
       </section>
@@ -37,15 +43,16 @@
         <input id="email" type="email" />
         <label for="cep">CEP</label>
         <input id="cep" type="text" />
-        <label for="city">Cidade</label>
-        <input id="city" type="text" />
         <label for="street">Rua</label>
         <input id="street" type="text" />
         <label for="neighborhood">Bairro</label>
         <input id="neighborhood" type="text" />
+        <label for="city">Cidade</label>
+        <input id="city" type="text" />
         <label for="state">UF</label>
         <input id="state" type="text" />
-        <input id="submit" type="button" value="Salvar"/>
+        <input id="submit" type="button" value="Salvar" />
+        <input id="submit-update" type="button" value="Atualizar" />
       </section>
     </main>
   </body>
