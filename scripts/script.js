@@ -18,6 +18,7 @@ const state = document.getElementById("state");
 const submit = document.getElementById("submit");
 const submitUpdate = document.getElementById("submit-update");
 
+
 const insertResultGetCepInput = async (value) => {
   try {
     const { bairro, localidade, logradouro, uf } = await getCep(value);
@@ -77,9 +78,9 @@ const addLineTable = (props) => {
   newRow.insertCell().innerText = props.tel;
   newRow.insertCell().innerText = props.email;
   newRow.insertCell().innerText = props.cep;
-  newRow.insertCell().innerText = props.city;
   newRow.insertCell().innerText = props.street;
   newRow.insertCell().innerText = props.neighborhood;
+  newRow.insertCell().innerText = props.city;
   newRow.insertCell().innerText = props.state;
 
   const btnRemove = document.createElement("button");
@@ -87,12 +88,14 @@ const addLineTable = (props) => {
   btnRemove.addEventListener("click", () => {
     removePeople(newRow.getAttribute("id"));
   });
+  btnRemove.setAttribute("data-title", "Remover registro")
   btnUpdate.addEventListener("click", () => {
     const id = newRow.getAttribute("id");
     const people = getPeopleById(id);
     addValueEntryForUpdate(people);
     submitUpdate.setAttribute("key", `update-${id}`);
   });
+  btnUpdate.setAttribute("data-title", "Atualizar registro")
   btnRemove.innerHTML = `<img src="./img/delete.svg" alt="" width="30px"/>`;
   btnUpdate.innerHTML = `<img src="./img/refresh.svg" alt="" width="30px"/>`;
   const options = newRow.insertCell();
