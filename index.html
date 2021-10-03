@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./img/logo.svg" type="image/x-icon" />
     <title>Register data</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="cadastro.css" />
     <!--scripts-->
     <script src="scripts/script.js" type="module" defer></script>
   </head>
@@ -15,45 +18,74 @@
       <h1>Register data</h1>
     </header>
     <main>
-      <section><h2>Registro</h2></section>
-      <section>
+      <section class="container cabecalho">
+        <h2>Registro</h2>
+        <button id="newRegister" data-title="Adicionar um novo registro">
+          <img src="./img/plus.svg" alt="" width="30px" />
+        </button>
+      </section>
+      <section class="container container-table">
         <table id="table-list">
           <tr>
-            <td>Nome</td>
-            <td>Sobrenome</td>
-            <td>Telefone</td>
-            <td>E-mail</td>
-            <td>CEP</td>
-            <td>Rua</td>
-            <td>Bairro</td>
-            <td>Cidade</td>
-            <td>UF</td>
-            <td><button></button></td>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th>CEP</th>
+            <th>Rua</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>UF</th>
+            <th></th>
           </tr>
         </table>
       </section>
-      <section class="container-cadastro">
-        <label for="name">Nome</label>
-        <input id="name" type="text" />
-        <label for="lastname">Sobrenome</label>
-        <input id="lastname" type="text" />
-        <label for="tel">Telefone</label>
-        <input id="tel" type="tel" />
-        <label for="email">E-mail</label>
-        <input id="email" type="email" />
-        <label for="cep">CEP</label>
-        <input id="cep" type="text" />
-        <label for="street">Rua</label>
-        <input id="street" type="text" />
-        <label for="neighborhood">Bairro</label>
-        <input id="neighborhood" type="text" />
-        <label for="city">Cidade</label>
-        <input id="city" type="text" />
-        <label for="state">UF</label>
-        <input id="state" type="text" />
-        <input id="submit" type="button" value="Salvar" />
-        <input id="submit-update" type="button" value="Atualizar" />
+      <section id="containerCadastro" class="container-cadastro not-active">
+        <div class="container">
+          <button id="closeRegister" data-title="Fechar cadastro">
+            <img src="img/delete.svg" alt="close" />
+          </button>
+          <div class="input">
+            <label for="name">Nome</label>
+            <input id="name" type="text" />
+          </div>
+          <div class="input">
+            <label for="lastname">Sobrenome</label>
+            <input id="lastname" type="text" />
+          </div>
+          <div class="input">
+            <label for="tel">Telefone</label>
+            <input id="tel" type="tel" />
+          </div>
+          <div class="input">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" />
+          </div>
+          <div class="input">
+            <label for="cep">CEP</label>
+            <input id="cep" type="text" />
+          </div>
+          <div class="input">
+            <label for="street">Rua</label>
+            <input id="street" type="text" />
+          </div>
+          <div class="input">
+            <label for="neighborhood">Bairro</label>
+            <input id="neighborhood" type="text" />
+          </div>
+          <div class="input">
+            <label for="city">Cidade</label>
+            <input id="city" type="text" />
+          </div>
+          <div class="input">
+            <label for="state">UF</label>
+            <input id="state" type="text" />
+          </div>
+          <input id="submit" type="button" value="Salvar" />
+          <input id="submit-update" type="button" value="Atualizar" />
+        </div>
       </section>
     </main>
+    <script src="scripts/controllerCardRegister.js" defer></script>
   </body>
 </html>

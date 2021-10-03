@@ -1,0 +1,157 @@
+.container-cadastro {
+  display: none;
+  width: 100%;
+  padding: 4px;
+  overflow: auto;
+  height: calc(100% - 56px);
+  background: var(--color-blue-dark);
+  position: absolute;
+  top: 3.5rem;
+}
+
+.active {
+  animation: cadastro 1s normal;
+  display: inline-flex !important;
+}
+
+.not-active {
+  animation: cadastro 1s reverse;
+  display: none;
+}
+
+@keyframes cadastro {
+  0% {
+    display: none;
+    height: 0;
+  }
+  100% {
+    display: inline-flex;
+    height: calc(100% - 56px);
+  }
+}
+
+.container-cadastro .container {
+  box-sizing: content-box;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: cadastro-itens 1s normal;
+  margin: auto;
+  margin-bottom: 8px;
+  padding-top: 24px;
+  position: relative;
+}
+
+@keyframes cadastro-itens {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.container-cadastro label {
+  color: var(--text-color-black);
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  background: var(--text-color-with);
+  border: 3px solid transparent;
+  border-radius: 2px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 4px;
+  transition: border 0.5s;
+}
+
+.input:focus-within {
+  border: 3px solid #3498db;
+}
+
+.input input:focus {
+  border: none;
+}
+
+.container-cadastro input:not(input[type="button"]) {
+  padding: 0.3rem;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+#newRegister,
+#closeRegister{
+  background: none;
+}
+
+
+[data-title]:hover:after {
+	opacity: 1;
+	transition: all 0.1s ease 0.5s;
+	visibility: visible;
+}
+[data-title]:after {
+	content: attr(data-title);
+	position: absolute;
+	bottom: -1.6rem;
+	right: 30px;
+	padding: 4px 4px 4px 8px;
+	color: var(--text-color-with);
+	white-space: nowrap;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0px 0px 4px #666;
+	-webkit-box-shadow: 0px 0px 4px #666;
+	box-shadow: 0px 0px 4px #666;
+	background: var(--color-blue-dark);
+	opacity: 0;
+	z-index: 99999;
+	visibility: hidden;
+}
+[data-title] {
+	position: relative;
+}
+
+
+#closeRegister {
+  top: 0;
+  right: 0;
+  position: absolute;
+}
+
+#closeRegister img {
+  width: 30px;
+}
+
+#submit,
+#submit-update {
+  color: var(--text-color-with);
+  padding: 10px;
+  margin-top: 1rem;
+  border-radius: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+#submit {
+  background-color: var(--color-green);
+}
+
+#submit-update {
+  display: none;
+  background-color: var(--color-yelow);
+}
+
+@media (min-width: 780px) {
+  .container-cadastro .container {
+    width: 90%;
+    box-sizing: content-box;
+    display: inline-flex;
+    justify-content: center;
+    margin: auto;
+  }
+}
