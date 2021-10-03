@@ -55,11 +55,6 @@ h2 {
   color: var(--text-color-black);
 }
 
-.container-table {
-  overflow: auto;
-  overflow-x: auto;
-}
-
 table {
   border-collapse: collapse;
   width: 100%;

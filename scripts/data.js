@@ -4,9 +4,9 @@ export function addPeople(
   tel,
   email,
   cep,
-  city,
   street,
   neighborhood,
+  city,
   state
 ) {
   // Pega a lista já cadastrada, se não houver vira um array vazio
@@ -24,7 +24,7 @@ export function addPeople(
     cep,
     street,
     neighborhood,
-		city,
+    city,
     state,
   });
 
@@ -62,7 +62,7 @@ export function updatePeople(
   city,
   street,
   neighborhood,
-  state,
+  state
 ) {
   const peoples = JSON.parse(localStorage.getItem("lista-pessoas") || "[]");
   const index = peoples.findIndex(({ id }) => id === parseInt(idPeople));

@@ -18,7 +18,6 @@ const state = document.getElementById("state");
 const submit = document.getElementById("submit");
 const submitUpdate = document.getElementById("submit-update");
 
-
 const insertResultGetCepInput = async (value) => {
   try {
     const { bairro, localidade, logradouro, uf } = await getCep(value);
@@ -88,18 +87,32 @@ const addLineTable = (props) => {
   btnRemove.addEventListener("click", () => {
     removePeople(newRow.getAttribute("id"));
   });
-  btnRemove.setAttribute("data-title", "Remover registro")
+  btnRemove.setAttribute("data-title", "Remover registro");
   btnUpdate.addEventListener("click", () => {
     const id = newRow.getAttribute("id");
     const people = getPeopleById(id);
     addValueEntryForUpdate(people);
     submitUpdate.setAttribute("key", `update-${id}`);
+    document.getElementById("containerCadastro").classList.toggle("not-active");
+    document.getElementById("containerCadastro").classList.toggle("active");
+    submitUpdate.style.display = "block";
+    submit.style.display = "none";
   });
-  btnUpdate.setAttribute("data-title", "Atualizar registro")
+  btnUpdate.setAttribute("data-title", "Atualizar registro");
   btnRemove.innerHTML = `<img src="./img/delete.svg" alt="" width="30px"/>`;
   btnUpdate.innerHTML = `<img src="./img/refresh.svg" alt="" width="30px"/>`;
   const options = newRow.insertCell();
   options.append(btnRemove, btnUpdate);
+};
+
+const renderLines = () => {
+  const peoples = getPeople();
+  const tbody = (document
+    .getElementById("table-list")
+    .getElementsByTagName("tbody")[0].innerHTML = "");
+  for (const iterator of peoples) {
+    addLineTable({ ...iterator });
+  }
 };
 
 submit.addEventListener("click", (e) => {
@@ -120,9 +133,9 @@ submit.addEventListener("click", (e) => {
   clearInputs();
 });
 
-submitUpdate.addEventListener("click", (e)=>{
+submitUpdate.addEventListener("click", (e) => {
   e.preventDefault();
-  const id = submitUpdate.getAttribute("key").replace("update-", "")
+  const id = submitUpdate.getAttribute("key").replace("update-", "");
   updatePeople(
     id,
     name.value,
@@ -134,18 +147,12 @@ submitUpdate.addEventListener("click", (e)=>{
     neighborhood.value,
     city.value,
     state.value
-  )
-})
-
-const renderLines = () => {
-  const peoples = getPeople();
-  const worker = new Worker("data.js");
-  worker.onmessage = (e) => {
-    console.log(e);
-  };
-  for (const iterator of peoples) {
-    addLineTable({ ...iterator });
-  }
-};
+  );
+  document.getElementById("containerCadastro").classList.toggle("not-active");
+  document.getElementById("containerCadastro").classList.toggle("active");
+  submitUpdate.style.display = "none";
+  submit.style.display = "block";
+  renderLines();
+});
 
 renderLines();
