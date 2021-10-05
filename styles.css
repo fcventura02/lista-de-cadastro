@@ -46,6 +46,20 @@ header {
   margin-bottom: 1rem;
 }
 
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register p {
+  padding: 0.4rem;
+}
+
+.register #count-register {
+  font-weight: 700;
+}
+
 h1 {
   font-size: 2rem;
 }
@@ -55,9 +69,16 @@ h2 {
   color: var(--text-color-black);
 }
 
+.container-table {
+  width: 95%;
+  margin-bottom: 1rem;
+  overflow-x: scroll;
+  overflow-y: clip;
+}
+
 table {
   border-collapse: collapse;
-  width: 100%;
+  min-width: 100%;
   max-width: 310px;
 }
 

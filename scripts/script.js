@@ -1,4 +1,5 @@
 import { getCep } from "./api.js";
+import mask from "./mask.js";
 import {
   addPeople,
   removePeople,
@@ -17,6 +18,7 @@ const neighborhood = document.getElementById("neighborhood");
 const state = document.getElementById("state");
 const submit = document.getElementById("submit");
 const submitUpdate = document.getElementById("submit-update");
+const countRegister = document.getElementById("count-register");
 
 const insertResultGetCepInput = async (value) => {
   try {
@@ -54,14 +56,15 @@ const addValueEntryForUpdate = (arr) => {
   state.value = arr.state;
 };
 
-cepInput.addEventListener("focusout", (e) =>
-  insertResultGetCepInput(e.target.value)
-);
-cepInput.addEventListener("keypress", ({ key }) => {
-  if (key === "Enter") {
-    cepInput.blur();
+const renderLines = (peoples = getPeople()) => {
+  countRegister.innerText = peoples.length;
+  document
+    .getElementById("table-list")
+    .getElementsByTagName("tbody")[0].innerHTML = "";
+  for (const iterator of peoples) {
+    addLineTable({ ...iterator });
   }
-});
+};
 
 const addLineTable = (props) => {
   //Seleciona o body  da tabela
@@ -86,6 +89,7 @@ const addLineTable = (props) => {
   const btnUpdate = document.createElement("button");
   btnRemove.addEventListener("click", () => {
     removePeople(newRow.getAttribute("id"));
+    renderLines();
   });
   btnRemove.setAttribute("data-title", "Remover registro");
   btnUpdate.addEventListener("click", () => {
@@ -105,31 +109,29 @@ const addLineTable = (props) => {
   options.append(btnRemove, btnUpdate);
 };
 
-const renderLines = () => {
-  const peoples = getPeople();
-  const tbody = (document
-    .getElementById("table-list")
-    .getElementsByTagName("tbody")[0].innerHTML = "");
-  for (const iterator of peoples) {
-    addLineTable({ ...iterator });
+cepInput.addEventListener("focusout", (e) =>
+  insertResultGetCepInput(e.target.value)
+);
+cepInput.addEventListener("keypress", ({ key }) => {
+  if (key === "Enter") {
+    cepInput.blur();
   }
-};
+});
 
 submit.addEventListener("click", (e) => {
-  e.preventDefault();
-  addLineTable(
-    addPeople(
-      name.value,
-      lastname.value,
-      tel.value,
-      email.value,
-      cepInput.value,
-      street.value,
-      neighborhood.value,
-      city.value,
-      state.value
-    )
+  const { people, length } = addPeople(
+    name.value,
+    lastname.value,
+    tel.value,
+    email.value,
+    cepInput.value,
+    street.value,
+    neighborhood.value,
+    city.value,
+    state.value
   );
+  addLineTable(people);
+  countRegister.innerText = length;
   clearInputs();
 });
 
@@ -156,3 +158,13 @@ submitUpdate.addEventListener("click", (e) => {
 });
 
 renderLines();
+
+tel.addEventListener("input", (e) => {
+  e.target.value = mask["tel"](e.target.value);
+});
+cepInput.addEventListener("input", (e) => {
+  e.target.value = mask["cep"](e.target.value);
+});
+email.addEventListener("focusout", (e) => {
+  mask["email"](e.target.value);
+});

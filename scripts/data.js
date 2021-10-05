@@ -31,7 +31,10 @@ export function addPeople(
   // Salva a lista alterada
   localStorage.setItem("lista-pessoas", JSON.stringify(lista_pessoas));
   localStorage.setItem("id", JSON.stringify(id + 1));
-  return lista_pessoas[lista_pessoas.length - 1];
+  return {
+    people: lista_pessoas[lista_pessoas.length - 1],
+    length: lista_pessoas.length,
+  };
 }
 
 export function getPeople() {
