@@ -9,6 +9,7 @@
     <!--Styles-->
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="cadastro.css" />
+    <link rel="stylesheet" href="mask.css" />
     <!--scripts-->
     <script src="scripts/script.js" type="module" defer></script>
   </head>
@@ -21,13 +22,13 @@
       <section class="container cabecalho">
         <h2>Registro</h2>
         <div class="register">
-         <p>cadastros: <span id="count-register">1</span></p> 
+          <p>cadastros: <span id="count-register">1</span></p>
           <button id="newRegister" data-title="Adicionar um novo registro">
             <img src="./img/plus.svg" alt="" width="30px" />
           </button>
         </div>
       </section>
-      <section class="container container-table">
+      <section id="scrollArea" class="container container-table">
         <table id="table-list">
           <thead>
             <tr>
@@ -47,49 +48,60 @@
         </table>
       </section>
       <section id="containerCadastro" class="container-cadastro not-active">
-        <div class="container">
+        <form id="form" class="container">
           <button id="closeRegister" data-title="Fechar cadastro">
             <img src="img/delete.svg" alt="close" />
           </button>
           <div class="input">
             <label for="name">Nome</label>
-            <input id="name" type="text" />
+            <input required pattern="[A-Z][a-z]+" id="name" type="text" />
           </div>
           <div class="input">
             <label for="lastname">Sobrenome</label>
-            <input id="lastname" type="text" />
+            <input required pattern="[A-Za-z\s]+" id="lastname" type="text" />
           </div>
           <div class="input">
             <label for="tel">Telefone</label>
-            <input id="tel" type="tel" maxlength="16"/>
+            <input
+              required
+              id="tel"
+              type="tel"
+              maxlength="16"
+              minlength="14"
+            />
           </div>
           <div class="input">
             <label for="email">E-mail</label>
-            <input id="email" type="email" />
+            <input required id="email" type="email" />
           </div>
           <div class="input">
             <label for="cep">CEP</label>
-            <input id="cep" type="text" />
+            <input required id="cep" type="text" />
           </div>
           <div class="input">
             <label for="street">Rua</label>
-            <input id="street" type="text" />
+            <input required pattern="[A-Za-z,0-9\s]+" id="street" type="text" />
           </div>
           <div class="input">
             <label for="neighborhood">Bairro</label>
-            <input id="neighborhood" type="text" />
+            <input
+              required
+              pattern="[A-Za-z\s]+"
+              id="neighborhood"
+              type="text"
+            />
           </div>
           <div class="input">
             <label for="city">Cidade</label>
-            <input id="city" type="text" />
+            <input required pattern="[A-Za-z\s]+" id="city" type="text" />
           </div>
           <div class="input">
             <label for="state">UF</label>
-            <input id="state" type="text" />
+            <input required pattern="[A-Za-z\s]+" id="state" type="text" />
           </div>
-          <input id="submit" type="button" value="Salvar" />
-          <input id="submit-update" type="button" value="Atualizar" />
-        </div>
+          <button id="submit" type="submit" disabled>Salvar</button>
+          <button id="submit-update" type="submit" disabled>Atualizar</button>
+        </form>
       </section>
     </main>
     <script src="scripts/controllerCardRegister.js" defer></script>

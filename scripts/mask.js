@@ -12,11 +12,18 @@ export default {
   email(val) {
     const reg = /\S+@\S+\.\S+/;
     if (reg.test(val) && val.value !== "") {
-      email.classList.add("email-valid");
-      email.classList.remove("email-invalid");
+      document.getElementById("email").parentNode.classList.add("input-valid");
+      document
+        .getElementById("email")
+        .parentNode.classList.remove("input-invalid");
     } else {
-      email.classList.add("email-invalid");
-      email.classList.remove("email-valid");
+      document
+        .getElementById("email")
+        .parentNode.classList.add("input-invalid");
+      document
+        .getElementById("email")
+        .parentNode.classList.remove("input-valid");
     }
+    return val;
   },
 };

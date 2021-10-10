@@ -1,0 +1,15 @@
+.input-valid{
+	border: 3px var(--color-green) solid;
+}
+
+.input-valid label, .input-valid input, input:valid{
+	color:  var(--color-green)
+}
+
+.input-invalid{
+	border: 3px var(--color-red) solid;
+}
+
+.input-invalid label, .input-invalid input, input:invalid{
+	color:  var(--color-red)
+}

@@ -135,6 +135,13 @@
   border-radius: 2px;
   font-weight: 700;
   text-transform: uppercase;
+  cursor: pointer;
+}
+
+#submit:disabled,
+#submit-update:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
 }
 
 #submit {

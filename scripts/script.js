@@ -19,6 +19,7 @@ const state = document.getElementById("state");
 const submit = document.getElementById("submit");
 const submitUpdate = document.getElementById("submit-update");
 const countRegister = document.getElementById("count-register");
+const form = document.getElementById("form");
 
 const insertResultGetCepInput = async (value) => {
   try {
@@ -33,15 +34,11 @@ const insertResultGetCepInput = async (value) => {
 };
 
 const clearInputs = () => {
-  name.value = "";
-  lastname.value = "";
-  tel.value = "";
-  email.value = "";
-  cepInput.value = "";
-  city.value = "";
-  street.value = "";
-  neighborhood.value = "";
-  state.value = "";
+  let fields = form.querySelectorAll("input");
+  for (let interator of fields) {
+    interator.value = "";
+    interator.parentNode.classList.remove("input-valid");
+  }
 };
 
 const addValueEntryForUpdate = (arr) => {
@@ -118,21 +115,51 @@ cepInput.addEventListener("keypress", ({ key }) => {
   }
 });
 
+const validForm = (element) => {
+  let isvalid = false;
+  let fields = form.querySelectorAll("input");
+  for (let input of fields) {
+    if (!input.validity.valid) {
+      input.parentNode.classList.add("input-invalid");
+      input.parentNode.classList.remove("input-valid");
+      isvalid = false;
+      break;
+    } else {
+      input.parentNode.classList.add("input-valid");
+      input.parentNode.classList.remove("input-invalid");
+      isvalid = true;
+    }
+  }
+  isvalid
+    ? element.removeAttribute("disabled")
+    : element.setAttribute("disabled", "disabled");
+};
+
+submit.addEventListener("pointerover", () => {
+  validForm(submit);
+});
+submitUpdate.addEventListener("pointerover", () => {
+  validForm(submitUpdate);
+});
+
 submit.addEventListener("click", (e) => {
-  const { people, length } = addPeople(
-    name.value,
-    lastname.value,
-    tel.value,
-    email.value,
-    cepInput.value,
-    street.value,
-    neighborhood.value,
-    city.value,
-    state.value
-  );
-  addLineTable(people);
-  countRegister.innerText = length;
-  clearInputs();
+  try {
+    console.log(e);
+    const { people, length } = addPeople(
+      name.value,
+      lastname.value,
+      tel.value,
+      email.value,
+      cepInput.value,
+      street.value,
+      neighborhood.value,
+      city.value,
+      state.value
+    );
+    countRegister.innerText = length;
+    addLineTable(people);
+    clearInputs();
+  } catch (error) {}
 });
 
 submitUpdate.addEventListener("click", (e) => {
@@ -162,9 +189,34 @@ renderLines();
 tel.addEventListener("input", (e) => {
   e.target.value = mask["tel"](e.target.value);
 });
-cepInput.addEventListener("input", (e) => {
-  e.target.value = mask["cep"](e.target.value);
-});
+cepInput.addEventListener("input", (e) => {});
 email.addEventListener("focusout", (e) => {
   mask["email"](e.target.value);
 });
+
+const validInput = (e) => {
+  if (!e.target.validity.valid) return console.log("invalid");
+  return console.log("valid");
+};
+
+let fields = form.querySelectorAll("input");
+for (let interator of fields) {
+  interator.addEventListener("input", () => {
+    if (!interator.validity.valid) {
+      interator.parentNode.classList.add("input-invalid");
+      interator.parentNode.classList.remove("input-valid");
+    } else {
+      interator.value = mask[interator.id]
+        ? mask[interator.id](interator.value)
+        : interator.value;
+      interator.parentNode.classList.add("input-valid");
+      interator.parentNode.classList.remove("input-invalid");
+    }
+  });
+}
+
+/* name.addEventListener("input", (e) => validInput(e)); */
+
+/* name.addEventListener("input", (e)=>{
+  console.log(e.target.validity.valid)
+}) */
