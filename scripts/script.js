@@ -143,6 +143,7 @@ submitUpdate.addEventListener("pointerover", () => {
 });
 
 submit.addEventListener("click", (e) => {
+  e.preventDefault()
   try {
     console.log(e);
     const { people, length } = addPeople(
@@ -159,7 +160,9 @@ submit.addEventListener("click", (e) => {
     countRegister.innerText = length;
     addLineTable(people);
     clearInputs();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 submitUpdate.addEventListener("click", (e) => {
@@ -186,14 +189,6 @@ submitUpdate.addEventListener("click", (e) => {
 
 renderLines();
 
-tel.addEventListener("input", (e) => {
-  e.target.value = mask["tel"](e.target.value);
-});
-cepInput.addEventListener("input", (e) => {});
-email.addEventListener("focusout", (e) => {
-  mask["email"](e.target.value);
-});
-
 const validInput = (e) => {
   if (!e.target.validity.valid) return console.log("invalid");
   return console.log("valid");
@@ -206,17 +201,17 @@ for (let interator of fields) {
       interator.parentNode.classList.add("input-invalid");
       interator.parentNode.classList.remove("input-valid");
     } else {
-      interator.value = mask[interator.id]
-        ? mask[interator.id](interator.value)
-        : interator.value;
-      interator.parentNode.classList.add("input-valid");
-      interator.parentNode.classList.remove("input-invalid");
+      if (interator.id === "email") {
+        interator.value = mask[interator.id]
+          ? mask[interator.id](interator.value)
+          : interator.value;
+      } else {
+        interator.value = mask[interator.id]
+          ? mask[interator.id](interator.value)
+          : interator.value;
+        interator.parentNode.classList.add("input-valid");
+        interator.parentNode.classList.remove("input-invalid");
+      }
     }
   });
 }
-
-/* name.addEventListener("input", (e) => validInput(e)); */
-
-/* name.addEventListener("input", (e)=>{
-  console.log(e.target.validity.valid)
-}) */

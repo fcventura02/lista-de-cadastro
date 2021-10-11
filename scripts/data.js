@@ -13,6 +13,12 @@ export function addPeople(
   const lista_pessoas = JSON.parse(
     localStorage.getItem("lista-pessoas") || "[]"
   );
+  const verifyEmailEndFone = lista_pessoas.find(
+    (e) => e.tel === tel || e.email === email
+  );
+  
+  if (verifyEmailEndFone?.tel === tel) throw new Error("telefone cadastrado");
+  if (verifyEmailEndFone?.email === email) throw new Error("email cadastrado");
   const id = JSON.parse(localStorage.getItem("id") || 1);
   // Adiciona pessoa ao cadastro
   lista_pessoas.push({
