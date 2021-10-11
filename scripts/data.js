@@ -17,8 +17,8 @@ export function addPeople(
     (e) => e.tel === tel || e.email === email
   );
   
-  if (verifyEmailEndFone?.tel === tel) throw new Error("telefone cadastrado");
-  if (verifyEmailEndFone?.email === email) throw new Error("email cadastrado");
+  if (verifyEmailEndFone?.tel === tel) throw new Error("Telefone cadastrado");
+  if (verifyEmailEndFone?.email === email) throw new Error("Email cadastrado");
   const id = JSON.parse(localStorage.getItem("id") || 1);
   // Adiciona pessoa ao cadastro
   lista_pessoas.push({

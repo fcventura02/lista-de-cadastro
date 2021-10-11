@@ -1,0 +1,97 @@
+#alert{
+	width: 0%;
+	max-width: 970px;
+	opacity: 0;
+	padding: 20px 5px 5px 5px;
+	border-radius: 0 0 0 5px;
+	position: absolute;
+	top: 56px;
+	right: 0;
+	animation: openAlert ease 8s;
+}
+
+#alert::after{
+	content: "";
+	width: 100%;
+	height: 5px;
+	background: var(--text-color-with);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	animation: temp normal 8s;
+}
+
+#alert.error{
+	background-color: var(--color-red);
+}
+
+#alert.succes{
+	background-color: var(--color-green);
+}
+
+#alert p{
+	color: var(--text-color-with);
+	font-weight: 700;
+	padding: 5px;
+}
+
+#alert button{
+	width: 20px;
+	height: 20px;
+	background: none;
+	position: inherit;
+	top: 5px;
+	right: 10px;
+}
+
+#alert button::after{
+	content: "";
+	width: 20px;
+	height: 4px;
+	background: var(--text-color-with);
+	position: absolute;
+	top: 7px;
+	left: 0;
+	transform: rotate(45deg);
+}
+
+#alert button::before{
+	content: "";
+	width: 20px;
+	height: 4px;
+	background: var(--text-color-with);
+	position: absolute;
+	top: 7px;
+	left: 0%;
+	transform: rotate(-45deg);
+}
+
+@keyframes openAlert{
+	0%{
+		width: 0%;
+		opacity: 0;
+	}
+
+	10%{
+		opacity: 1;
+		width: 100%;
+	}
+	90%{
+		opacity: 1;
+		width: 100%;
+	}
+	100%{
+		opacity: 0;
+		width: 0%;
+	}
+}
+
+@keyframes temp{
+	20%{
+		width: 100%;
+	}
+
+	100%{
+		width: 0%;
+	}
+}

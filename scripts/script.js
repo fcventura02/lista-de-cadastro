@@ -1,5 +1,6 @@
 import { getCep } from "./api.js";
 import mask from "./mask.js";
+import { alert } from "./alert.js";
 import {
   addPeople,
   removePeople,
@@ -143,9 +144,8 @@ submitUpdate.addEventListener("pointerover", () => {
 });
 
 submit.addEventListener("click", (e) => {
-  e.preventDefault()
+  e.preventDefault();
   try {
-    console.log(e);
     const { people, length } = addPeople(
       name.value,
       lastname.value,
@@ -160,14 +160,20 @@ submit.addEventListener("click", (e) => {
     countRegister.innerText = length;
     addLineTable(people);
     clearInputs();
+    document.getElementById("containerCadastro").classList.toggle("not-active");
+    document.getElementById("containerCadastro").classList.toggle("active");
+    document
+      .getElementsByTagName("body")[0]
+      .appendChild(alert("Adicionado com sucesso.", "succes"));
   } catch (error) {
-    console.log(error)
+    document.getElementsByTagName("body")[0].appendChild(alert(error.message));
   }
 });
 
 submitUpdate.addEventListener("click", (e) => {
   e.preventDefault();
-  const id = submitUpdate.getAttribute("key").replace("update-", "");
+  try {
+    const id = submitUpdate.getAttribute("key").replace("update-", "");
   updatePeople(
     id,
     name.value,
@@ -185,6 +191,13 @@ submitUpdate.addEventListener("click", (e) => {
   submitUpdate.style.display = "none";
   submit.style.display = "block";
   renderLines();
+  document
+      .getElementsByTagName("body")[0]
+      .appendChild(alert("Atualizado com sucesso.", "succes"));
+  } catch (error) {
+    document.getElementsByTagName("body")[0].appendChild(alert(error.message));
+  }
+  
 });
 
 renderLines();
