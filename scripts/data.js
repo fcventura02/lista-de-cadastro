@@ -16,7 +16,7 @@ export function addPeople(
   const verifyEmailEndFone = lista_pessoas.find(
     (e) => e.tel === tel || e.email === email
   );
-  
+
   if (verifyEmailEndFone?.tel === tel) throw new Error("Telefone cadastrado");
   if (verifyEmailEndFone?.email === email) throw new Error("Email cadastrado");
   const id = JSON.parse(localStorage.getItem("id") || 1);
@@ -75,6 +75,23 @@ export function updatePeople(
 ) {
   const peoples = JSON.parse(localStorage.getItem("lista-pessoas") || "[]");
   const index = peoples.findIndex(({ id }) => id === parseInt(idPeople));
+  const verifyEmailEndFone = peoples.find((e) => {
+    console.log(e);
+    if (e.id !== peoples[index].id && (e.tel === tel || e.email === email))
+      return true;
+    return false;
+  });
+
+  if (
+    verifyEmailEndFone?.id !== peoples[index].id &&
+    verifyEmailEndFone?.tel === tel
+  )
+    throw new Error("Telefone cadastrado");
+  if (
+    verifyEmailEndFone?.id !== peoples[index].id &&
+    verifyEmailEndFone?.email === email
+  )
+    throw new Error("Email cadastrado");
   (peoples[index].name = name),
     (peoples[index].lastname = lastname),
     (peoples[index].tel = tel),
