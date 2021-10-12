@@ -86,7 +86,7 @@ const addLineTable = (props) => {
   const btnRemove = document.createElement("button");
   const btnUpdate = document.createElement("button");
   btnRemove.addEventListener("click", () => {
-    removePeople(newRow.getAttribute("id"));
+    removePeople(props.id);
     renderLines();
   });
   btnRemove.setAttribute("data-title", "Remover registro");
