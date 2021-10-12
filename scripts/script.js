@@ -99,6 +99,7 @@ const addLineTable = (props) => {
     document.getElementById("containerCadastro").classList.toggle("active");
     submitUpdate.style.display = "block";
     submit.style.display = "none";
+    document.getElementById("containerCadastro").scrollIntoView();
   });
   btnUpdate.setAttribute("data-title", "Atualizar registro");
   btnRemove.innerHTML = `<img src="./img/delete.svg" alt="" width="30px"/>`;
@@ -174,30 +175,29 @@ submitUpdate.addEventListener("click", (e) => {
   e.preventDefault();
   try {
     const id = submitUpdate.getAttribute("key").replace("update-", "");
-  updatePeople(
-    id,
-    name.value,
-    lastname.value,
-    tel.value,
-    email.value,
-    cepInput.value,
-    street.value,
-    neighborhood.value,
-    city.value,
-    state.value
-  );
-  document.getElementById("containerCadastro").classList.toggle("not-active");
-  document.getElementById("containerCadastro").classList.toggle("active");
-  submitUpdate.style.display = "none";
-  submit.style.display = "block";
-  renderLines();
-  document
+    updatePeople(
+      id,
+      name.value,
+      lastname.value,
+      tel.value,
+      email.value,
+      cepInput.value,
+      street.value,
+      neighborhood.value,
+      city.value,
+      state.value
+    );
+    document.getElementById("containerCadastro").classList.toggle("not-active");
+    document.getElementById("containerCadastro").classList.toggle("active");
+    submitUpdate.style.display = "none";
+    submit.style.display = "block";
+    renderLines();
+    document
       .getElementsByTagName("body")[0]
       .appendChild(alert("Atualizado com sucesso.", "succes"));
   } catch (error) {
     document.getElementsByTagName("body")[0].appendChild(alert(error.message));
   }
-  
 });
 
 renderLines();

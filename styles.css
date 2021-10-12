@@ -18,9 +18,33 @@
   font-family: var(--font-Inter);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: #f5f5f5;
   width: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4d4c4c;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
 }
 
 header {
